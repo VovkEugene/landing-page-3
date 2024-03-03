@@ -1,5 +1,9 @@
+import { benefits } from "../constants";
 import Section from "./Section";
 import Heading from "./Heading";
+import Arrow from "../assets/svg/Arrow";
+import { GradientLight } from "./design/Benefits";
+import ClipPath from "../assets/svg/ClipPath";
 
 const Benefits = () => {
   return (
@@ -9,6 +13,52 @@ const Benefits = () => {
           title="Chat Smarter, Not Harder with Brainwave"
           className="md:max-w-md lg:max-w-2xl"
         />
+        <div className="mb-10 flex flex-wrap gap-10">
+          {benefits.map((item) => (
+            <div
+              className="block relative p-0.5 bg-no-repeat bg-[length:100%_100%] md:max-w-[24rem]"
+              style={{
+                backgroundImage: `url(${item.backgroundUrl})`,
+              }}
+              key={item.id}
+            >
+              <div className="relative min-h-[22rem] p-[2.4rem] flex flex-col z-2 pointer-events-none">
+                <h5 className="h5 mb-5">{item.title}</h5>
+                <p className="body-2 mb-6 text-n-3">{item.text}</p>
+                <div className="mt-auto flex items-center">
+                  <img
+                    src={item.iconUrl}
+                    alt="item.title"
+                    width={48}
+                    height={48}
+                  />
+                  <p className="ml-auto font-code font-bold uppercase tracking-wider text-xs">
+                    Explore more
+                  </p>
+                  <Arrow />
+                </div>
+              </div>
+              {item.light && <GradientLight />}
+              <div
+                className="absolute inset-0.5 bg-n-8"
+                style={{ clipPath: "url(#benefits)" }}
+              >
+                <div className="absolute inset-0 opacity-0 transition-opacity hover:opacity-10">
+                  {item.imageUrl && (
+                    <img
+                      src={item.imageUrl}
+                      width={380}
+                      height={362}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+                </div>
+              </div>
+              <ClipPath />
+            </div>
+          ))}
+        </div>
       </div>
     </Section>
   );
